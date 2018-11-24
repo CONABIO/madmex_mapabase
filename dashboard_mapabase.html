@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8" />
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+
+    $(function() {
+        $('#2017').hide();
+        $('#2018').hide();
+        $('#satelite').change(function(){
+            if($('#satelite').val() == 'rapideye') {
+                $('#2017').hide();
+                $('#2018').hide(); 
+            } else {
+                $('#2017').show();
+                $('#2018').show();
+            } 
+        });
+    });
+    </script>
+<head>
+  <title>:: Tablero del SNMB ::</title>
+
+  <!-- general header -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/favicon/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Proyecto de monitoreo de especies a nivel nacional, CONABIO.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="monitoreo de especies, especies, forests, monitoring data, forest monitoring, forest landscapes, maps, gis, visualize, geospatial,  analysis, forest news, forest alerts, conservation, tree cover loss, explore forests, mapping, trees">
+    <meta name="author" content="CONABIO">
+    <meta name="DC.title" content="Monitoring Mexican species and biodiversity  | Monitoreo CONABIO">
+    <meta property="og:title" content="Monitoring species and biodiversity in Mexico | Monitoreo CONABIO">
+    <meta property="og:description" content="Gestión y análisis automatizado de datos satelitales, Análisis de datos sistemáticos a gran escala sobre biodiversidad mediante metodologías manuales y colocación de foto trampas.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://monitoreo.conabio.gob.mx/">
+    <meta property="og:image" content="http://monitoreo.conabio.gob.mx/snmb_charts/bg_slide1.png" />
+    <link rel="canonical" href="http://monitoreo.conabio.gob.mx/" />
+
+<!-- / General header -->
+
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="assets/lib/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/keen-dashboards.css" />
+  <style type="text/css">
+    .highcharts-root{
+      font-style: 'Gotham Rounded SSm A', 'Gotham Rounded SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 'normal';
+    }
+  </style>
+
+ 
+
+</head>
+<body class="application">
+   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid" id="dropdowns">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        &nbsp; 
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-left">
+
+ <div class="row">
+      <div class="form-group col-md-2">
+      <br />
+      <select id="satelite" class="form-control">
+          <option value="rapideye">Rapideye</option>
+          <option value="landsat">Landsat</option>          
+          <option value="sentinel">Sentinel</option>
+          </select>
+    </div>
+
+    <div class="form-group col-md-2">
+      <br />
+      <select id="anio" class="form-control">
+          <option value="2015" id="2015">2015</option>          
+          <option value="2017" id="2017">2017</option>
+          <option value="2018" id="2018">2018</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-3">
+      <br />
+       <SELECT id="estados" class="form-control">
+            <option VALUE="Total">Total</option>
+            <option VALUE="Aguascalientes">Aguascalientes</option>
+            <option VALUE="Baja_California">Baja California</option>
+            <option VALUE="Baja_California_Sur">Baja California Sur</option>
+            <option VALUE="Campeche">Campeche</option>
+            <option VALUE="Chiapas">Chiapas</option>
+            <option VALUE="Chihuahua">Chihuahua</option>
+            <option VALUE="Coahuila_de_Zaragoza">Coahuila de Zaragoza</option>
+            <option VALUE="Colima">Colima</option>
+            <option VALUE="Distrito_Federal">Ciudad de México</option>
+            <option VALUE="Durango">Durango</option>
+            <option VALUE="Estado_de_Mexico">Estado de México</option>
+            <option VALUE="Guanajuato">Guanajuato</option>
+            <option VALUE="Guerrero">Guerrero</option>
+            <option VALUE="Hidalgo">Hidalgo</option>
+            <option VALUE="Jalisco">Jalisco</option>
+            <option VALUE="Michoacan_de_Ocampo">Michoacán de Ocampo</option>
+            <option VALUE="Morelos">Morelos</option>
+            <option VALUE="Nayarit">Nayarit</option>
+            <option VALUE="Nuevo_Leon">Nuevo León</option>
+            <option VALUE="Oaxaca">Oaxaca</option>
+            <option VALUE="Puebla">Puebla</option>
+            <option VALUE="Queretaro">Querétaro</option>
+            <option VALUE="Quintana_Roo">Quintana Roo</option>
+            <option VALUE="San_Luis_Potosi">San Luis Potosí</option>
+            <option VALUE="Sinaloa">Sinaloa</option>
+            <option VALUE="Sonora">Sonora</option>
+            <option VALUE="Tabasco">Tabasco</option>
+            <option VALUE="Tamaulipas">Tamaulipas</option>
+            <option VALUE="Tlaxcala">Tlaxcala</option>
+            <option VALUE="Veracruz_de_Ignacio_de_la_Llave">Veracrúz de Ignacio de la Llave</option>
+            <option VALUE="Yucatan">Yucatán</option>
+            <option VALUE="Zacatecas">Zacatécas</option>   
+          </SELECT>
+    </div>
+
+        <div class="form-group col-md-2">
+      <br />
+      <select id="clases" class="form-control">
+          <option value="17">17</option>          
+          <option value="32">32</option>
+          </select>
+    </div>
+ 
+    <div class="form-group col-md-2">
+      <br />
+      <button type="submit" class="btn btn-primary"><a id="load_chart" href="#"><font color="#fff">Desplegar Datos</font></a></button>
+    </div>
+    
+    <div class="form-group col-md-1">
+      <br />
+      <button type="submit" class="btn btn-primary"><a id="download_data" href="#"><font color="#fff">Descargar Estado</font></a></button>
+    </div>
+        </ul>
+        <br />
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid" style="padding-top: 25px;>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+             <b>Mapa nacional de referencia, cobertura de suelo, 1:20000. INEGI, CONAFOR, CONABIO, SEMARNAT</b>
+          </div>
+          <div class="chart-stage" id="bar">
+          <!-- insert chart -->
+          <div id="container" style="height: 650px; margin: 0 auto"></div>
+          <script src="js/bar.js"></script>  
+          </div>
+          <div class="chart-notes">
+            <!-- Notes about this chart -->
+            <!-- <a href="mapeo_dashboard.pdf" target="_blank">Guía de clases utilizadas</a> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            <b>Cobertura de Suelo en Hectáreas: Mapa Base MAD-Mex</b><br /><br />
+          </div>
+          <div class="chart-stage" id="pie">
+          <!-- insert chart -->
+          <div id="pastel" style="height: 650px; margin: 0 auto"></div>
+         <script src="js/pie.js"></script> 
+          </div>
+          <div class="chart-notes">
+            <!-- Notes about this chart -->
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- MAPA -->
+<!--  
+<div class="row">
+      <div class="col-sm-8">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Mapa Base
+          </div>
+          <div class="chart-stage">
+            <div id="grid-1-1">
+              <iframe width="1000" height="620"  src="http://mapas.vegetacion.s3.amazonaws.com/maps/mapadereferencia.html" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="chart-notes">
+            &nbsp;
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Clases
+          </div>
+          <div class="chart-stage">
+            <img src="colores.png" height="620">
+          </div>
+          <div class="chart-notes">
+           &nbsp;
+          </div>
+        </div>
+      </div>
+    </div>
+-->
+    </div>
+    </div>
+    <hr>
+  </div>
+  <script type="text/javascript" src="assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" src="assets/lib/holderjs/holder.js"></script>
+  <script>
+    Holder.add_theme("white", { background:"#fff", foreground:"#a7a7a7", size:10 });
+  </script>
+
+  <script type="text/javascript" src="assets/lib/keen-js/dist/keen.min.js"></script>
+  <script type="text/javascript" src="assets/js/meta.js"></script>
+  <script src="js/download.js"></script>
+</body>
+</html>
