@@ -14,8 +14,9 @@
         $('#satelite').change(function(){
             if($('#satelite').val() == 'rapideye') {
                 $('#2017').hide();
-                $('#2018').hide(); 
-            } else {
+                $('#2018').hide();
+                $('#anio').val(2015);
+            } else if ($('#satelite').val() == 'landsat' || $('#satelite').val() == 'sentinel2') {
                 $('#2017').show();
                 $('#2018').show();
             } 
@@ -95,7 +96,7 @@
       <select id="satelite" class="form-control">
           <option value="rapideye">Rapideye</option>
           <option value="landsat">Landsat</option>          
-          <option value="sentinel">Sentinel</option>
+          <option value="sentinel2">Sentinel</option>
           </select>
     </div>
 
@@ -151,7 +152,7 @@
       <br />
       <select id="clases" class="form-control">
           <option value="17">17</option>          
-          <option value="32">32</option>
+          <option value="31">31</option>
           </select>
     </div>
  
