@@ -40,14 +40,14 @@ series: []
         
         var pastel = new Highcharts.Chart(optionss);
 
-          $("#load_chart").click(function(){
+          $("#load_chart").change(function(){
             // alert('f')
           var selected_values = $("#dropdowns :selected").map(function (i,sel) {
             return sel.value;
           }).toArray();
 
           selected_values = selected_values.toString().replace(/,/g, "/");
-          // console.log(selected_values);
+          console.log(selected_values);
 
           $.getJSON("./"+selected_values+"_pie.json", function(json) {
             optionss.series[0] = json[0];

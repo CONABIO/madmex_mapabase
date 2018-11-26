@@ -90,14 +90,14 @@ var options = {
         
         var chart = new Highcharts.Chart(options);
 
-        $("#load_chart").click(function(){
+        $("#load_chart").change(function(){
             // alert('f')
           var selected_values = $("#dropdowns :selected").map(function (i,sel) {
             return sel.value;
           }).toArray();
 
           selected_values = selected_values.toString().replace(/,/g, "/");
-          // console.log(selected_values);
+          console.log(selected_values);
 
           $.getJSON("./"+selected_values+"_bar.json", function(json) {
             options.series[0] = json[0];

@@ -19,7 +19,9 @@
             } else if ($('#satelite').val() == 'landsat' || $('#satelite').val() == 'sentinel2') {
                 $('#2017').show();
                 $('#2018').show();
-            } 
+                $('#2015').hide();
+                $('#anio').val(2017);
+            }
         });
     });
     </script>
@@ -90,7 +92,7 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-left">
 
- <div class="row">
+ <div class="row" id="load_chart">
       <div class="form-group col-md-2">
       <br />
       <select id="satelite" class="form-control">
@@ -156,10 +158,10 @@
           </select>
     </div>
  
-    <div class="form-group col-md-2">
+    <!-- <div class="form-group col-md-2">
       <br />
       <button type="submit" class="btn btn-primary"><a id="load_chart" href="#"><font color="#fff">Desplegar Datos</font></a></button>
-    </div>
+    </div> -->
     
     <div class="form-group col-md-1">
       <br />
@@ -181,7 +183,7 @@
           <div class="chart-stage" id="bar">
           <!-- insert chart -->
           <div id="container" style="height: 650px; margin: 0 auto"></div>
-          <script src="js/bar.js"></script>  
+          <script src="js_devel/bar.js"></script>  
           </div>
           <div class="chart-notes">
             <!-- Notes about this chart -->
@@ -197,7 +199,7 @@
           <div class="chart-stage" id="pie">
           <!-- insert chart -->
           <div id="pastel" style="height: 650px; margin: 0 auto"></div>
-         <script src="js/pie.js"></script> 
+         <script src="js_devel/pie.js"></script> 
           </div>
           <div class="chart-notes">
             <!-- Notes about this chart -->
